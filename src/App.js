@@ -6,6 +6,9 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import CoursesDashboard from './Views/Courses/CoursesDashboard';
+import AccountsDashBoard from './Views/Accounts/AccountsDashBoard';
+import StudentsDashboard from './Views/Students/StudentsDashboard';
 
 
 function App() {
@@ -18,13 +21,13 @@ function App() {
 
       <Switch>
         <Route path="/courses">
-          {/* CoursesDashboard */}
+          <CoursesDashboard />
         </Route>
         <Route path="/accounts">
-          {/* AccountsDashboard */}
+          <AccountsDashBoard />
         </Route>
         <Route path="/students">
-          {/* StudentsDashboard */}
+          <StudentsDashboard />
         </Route>
         <Route path="/login">
           {/* Login */}
