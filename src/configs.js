@@ -1,0 +1,1 @@
+export const url = 'https://aht-edu.herokuapp.com/api';
