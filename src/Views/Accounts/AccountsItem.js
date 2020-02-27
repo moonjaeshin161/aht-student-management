@@ -1,9 +1,12 @@
 import React from 'react'
 
-function AccountsItem() {
+function AccountsItem({account}) {
     return (
         <div>
-            create item
+            
+            <h1>{account._id}</h1>
+            <h1>{account.username}</h1>
+            
         </div>
     )
 }

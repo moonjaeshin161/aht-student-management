@@ -7,8 +7,8 @@ import {
   Link
 } from "react-router-dom";
 import CoursesDashboard from './Views/Courses/CoursesDashboard';
-import AccountsDashBoard from './Views/Accounts/AccountsDashBoard';
 import StudentsDashboard from './Views/Students/StudentsDashboard';
+import AccountsDashboard from './Views/Accounts/AccountsDashboard';
 
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
           <CoursesDashboard />
         </Route>
         <Route path="/accounts">
-          <AccountsDashBoard />
+          <AccountsDashboard />
         </Route>
         <Route path="/students">
           <StudentsDashboard />

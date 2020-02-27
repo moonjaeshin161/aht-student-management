@@ -1,9 +1,16 @@
 import React from 'react'
+import AccountsItem from './AccountsItem'
 
-function AccountsList() {
+function AccountsList({accounts}) {
+    console.log({accounts})
     return (
         <div>
-            create list
+            {
+                accounts?.state?.map((account,index) => {
+                    return <AccountsItem account = {account} key={index} />
+                })
+            }
+            
         </div>
     )
 }
