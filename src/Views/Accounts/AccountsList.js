@@ -6,7 +6,7 @@ function AccountsList({accounts}) {
     return (
         <div>
             {
-                accounts?.state?.map((account,index) => {
+                accounts?.map((account,index) => {
                     return <AccountsItem account = {account} key={index} />
                 })
             }
