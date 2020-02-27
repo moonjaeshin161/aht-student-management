@@ -21,15 +21,15 @@ function AccountsDashboard() {
         const json = await res.json();
         const data = json.data;
         console.log(data);
-        dispatch({type:"GET_ACCOUNTS", payload: data })
+        dispatch({ type: "GET_ACCOUNTS", payload: data })
     }
     useEffect(() => {
         getAccount();
-    },[])
+    }, [])
     return (
         <div>
             {console.log(accounts)}
-                <AccountsList accounts={accounts} />
+            <AccountsList accounts={accounts} />
         </div>
     )
 }
