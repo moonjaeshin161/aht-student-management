@@ -9,17 +9,24 @@ const CoursesDashboard = () => {
 
     ]);
 
-    const [tenLop, setTenLop] = useState();
-    const [viTri, setViTri] = useState();
+    const [inputs, setInputs] = useState();
 
     const getCourses = async () => {
-        const config = {
-            method: "POST",
-            length: 10,
-            start: 0,
-        }
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-        const res = await fetch(`${url}/qllh`, config);
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("start", "0");
+        urlencoded.append("length", "20");
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: urlencoded,
+            redirect: 'follow'
+        };
+
+        const res = await fetch(`${url}/qllh`, requestOptions);
         const json = await res.json();
         const data = json.data;
         console.log({ data });
@@ -30,24 +37,41 @@ const CoursesDashboard = () => {
         getCourses();
     }, []);
 
+    const handleChange = (e) => {
+        e.persist();
+        setInputs({
+            ...inputs,
+            [e.target.name]: e.target.value
+        });
+    }
+
     const addCourses = async (e) => {
         e.preventDefault();
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("tenLop", inputs.tenLop);
+        urlencoded.append("viTri", inputs.viTri);
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: urlencoded,
+            redirect: 'follow'
+        };
         const config = {
             method: "POST",
-            viTri: viTri,
-            tenLop: tenLop
+            body: JSON.stringify(inputs)
         }
-        console.log(viTri+tenLop);
-        
-        const res = await fetch(`${url}/qllh/create`, config);
+        // console.log(viTri+tenLop);
+
+        const res = await fetch(`${url}/qllh/create`, requestOptions);
         const json = await res.json();
         const msg = json.msg;
         console.log(msg);
-        dispatch({ type: 'ADD_COURSES', course: {
-            tenLop, viTri
-        } });
-        setTenLop('');
-        setViTri('');
+        dispatch({ type: 'ADD_COURSES', payload: inputs });
     }
 
 
@@ -56,11 +80,11 @@ const CoursesDashboard = () => {
             <div>Courses Dashboard</div>
             <CoursesList courses={courses} />
             <form onSubmit={addCourses}>
-                <input type="text" placeholder="Tên lớp" value={tenLop}
-                onChange={(e) => setTenLop(e.target.value)} required/>
-                <input type="text" placeholder="Vị trí" value={viTri}
-                onChange={(e) => setViTri(e.target.value)} required/>
-                <input type="submit" value="addCourse"/>
+                <input type="text" placeholder="Tên lớp" name="tenLop"
+                    onChange={handleChange} required />
+                <input type="text" placeholder="Vị trí" name="viTri"
+                    onChange={handleChange} required />
+                <input type="submit" value="addCourse" />
             </form>
         </>
     );

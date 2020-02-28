@@ -4,8 +4,8 @@ export const CoursesReducer = (state, action) => {
             return state.concat(action.payload);
         case 'ADD_COURSES':
             return [...state, {
-                tenLop: action.course.tenLop,
-                viTri: action.course.viTri
+                tenLop: action.payload.tenLop,
+                viTri: action.payload.viTri
             }];
         default:
             throw new Error();
